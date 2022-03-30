@@ -122,11 +122,11 @@ class LEOJSONBuilder:
                         _lang_cols = [_l.strip() for _l in row[1:] if _l.strip()]
                         _langs = [_lang_cols[0]] + [float(_lang_cols[1])] + [int(x) for x in _lang_cols[2:]]
                         if len(_langs) != 6:
-                            logging.getLogger(__name__).warnings(f"{__source}[person={person['name']}]Invalid person language: {row}")
+                            logging.getLogger(__name__).warning(f"{__source}[person={person['name']}]Invalid person language: {row}")
                         else:
                             for score in _langs[2:]:
                                 if score not in list(range(8)):
-                                    logging.getLogger(__name__).warnings(f"{__source}[person={person['name']}]Person language score: {score} must be within the range [0..7]")
+                                    logging.getLogger(__name__).warning(f"{__source}[person={person['name']}]Person language score: {score} must be within the range [0..7]")
                         person["languages"].append(_langs)
                 except Exception:
                     logging.getLogger(__name__).exception(f"{__source}Invalid person data row: {row}")
